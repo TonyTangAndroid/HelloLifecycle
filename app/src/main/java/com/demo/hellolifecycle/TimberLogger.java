@@ -1,30 +1,43 @@
 package com.demo.hellolifecycle;
 
-import androidx.lifecycle.Lifecycle.Event;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import timber.log.Timber;
 
-public class TimberLogger implements LifecycleObserver {
+public class TimberLogger implements DefaultLifecycleObserver {
 
-  @OnLifecycleEvent(Event.ON_RESUME)
-  public void onResume() {
-    Timber.i("onResume");
+  @Override
+  public void onCreate(@NonNull LifecycleOwner owner) {
+    Timber.i("onCreate:%s", owner.getClass().getSimpleName());
   }
 
-  @OnLifecycleEvent(Event.ON_PAUSE)
-  public void onPause() {
-    Timber.i("onPause");
+  @Override
+  public void onStart(@NonNull LifecycleOwner owner) {
+    Timber.i("onStart:%s", owner.getClass().getSimpleName());
+
   }
 
-  @OnLifecycleEvent(Event.ON_START)
-  public void onStart() {
-    Timber.i("onStart");
+  @Override
+  public void onResume(@NonNull LifecycleOwner owner) {
+    Timber.i("onResume:%s", owner.getClass().getSimpleName());
   }
 
-  @OnLifecycleEvent(Event.ON_STOP)
-  public void onStop() {
-    Timber.i("onStop");
+  @Override
+  public void onPause(@NonNull LifecycleOwner owner) {
+    Timber.i("onPause:%s", owner.getClass().getSimpleName());
+
+  }
+
+  @Override
+  public void onStop(@NonNull LifecycleOwner owner) {
+    Timber.i("onStop:%s", owner.getClass().getSimpleName());
+
+  }
+
+  @Override
+  public void onDestroy(@NonNull LifecycleOwner owner) {
+    Timber.i("onDestroy:%s", owner.getClass().getSimpleName());
   }
 }
